@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 import routes from './routes';
 
 import './database/index';
@@ -12,6 +13,12 @@ class App {
 
   middleweres() {
     this.server.use(express.json());
+
+    // Permitindo que acesse arquivos estáticos (interpretados pelo browser)
+    this.server.use(
+      '/files',
+      express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
+    );
   }
 
   routes() {
