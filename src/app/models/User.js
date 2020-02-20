@@ -15,7 +15,7 @@ class User extends Model {
         sequelize,
       }
     );
-
+    // Função chamada para gerar um hash antes de salvar o usuário
     this.addHook('beforeSave', async user => {
       // Gerando hash para novo usuário
       if (user.password) {
@@ -24,6 +24,12 @@ class User extends Model {
     });
 
     return this;
+  }
+
+  // Criando relacionamento usuário com avatar
+  static associate(models) {
+    // belongsTo (pertence a -> tipo de relacionamento)
+    this.belongsTo(models.File, { foreignKey: 'avatar_id' });
   }
 
   checkPassword(pasword) {
