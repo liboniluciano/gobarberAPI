@@ -9,8 +9,6 @@ class CancellationMail {
 
   // Tarefa que executa quando o processo é chamado
   async handle({ data }) {
-    console.log('A fila executou');
-
     const { appointment } = data;
     await Mail.sendMail({
       to: `${appointment.provider.name} <${appointment.provider.email}>`,
